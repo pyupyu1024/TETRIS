@@ -1,0 +1,22 @@
+{
+  "name": "tetris",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lano0423/TETRIS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lano0423/TETRIS/issues"
+  },
+  "homepage": "https://github.com/Lano0423/TETRIS#readme",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "socket.io": "^4.3.1"
+  }
+}
