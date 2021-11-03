@@ -1,14 +1,9 @@
-<<<<<<< HEAD
 class Canvas {
 
     constructor(id) {
-        this.canvas = new Array(20).fill(0);
-        
-        let can = document.getElementById(id);
-        this.ctx = can.getContext('2d');
-
-        can.width = 250;
-        can.height = 500;
+        this.canvas = new Array(20);
+        for (let i = 0; i < 20; i++)
+            this.canvas[i] = 0;
     }
 
     get(x, y) {
@@ -19,12 +14,6 @@ class Canvas {
     set(x, y, bool) {
         if (this.get(x, y) == bool) return;
         this.canvas[20 - y] ^= 1 << (9 - x);
-    }
-
-    draw(x, y, color) {
-        this.ctx.fillStyle = color;
-        let args = [x * 25, (19 - y) * 25];
-        this.ctx.fillRect(...args, 25, 25);
     }
 
 }
@@ -71,28 +60,9 @@ class BLOCK {
             block[i][1] = t_value;
         }
 
-        if (this.can_put(block)) {
-            this.del(this.block);
+        if (this.can_put(block))
             this.block = block;
-            this.put(this.block);
-        }
 
-    }
-
-    put(block) {
-        for (let i = 0; i < 4; i++) {
-            let x = block[i][0] + this.pos[0];
-            let y = block[i][1] + this.pos[1];
-            this.map.draw(x, y, this.color);
-        }
-    }
-
-    del(block) {
-        for (let i = 0; i < 4; i++) {
-            let x = block[i][0] + this.pos[0];
-            let y = block[i][1] + this.pos[1];
-            this.map.draw(x, y, 'white');
-        }
     }
 
     move(x, y) {
@@ -140,6 +110,8 @@ class TETRIS {
         }
     }
 
-} 
-=======
->>>>>>> 3a060283660ca7d65b234719234528390defc855
+    progress_map() {
+
+    }
+
+}
