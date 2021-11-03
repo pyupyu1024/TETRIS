@@ -1,0 +1,5 @@
+const TetrisSession = class {
+    constructor() {
+        
+    }
+}

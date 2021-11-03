@@ -10,7 +10,7 @@ app.use(express.static('html', {
     extensions: ['html', 'htm', "js"]
 }));
 
-app.use((_req, res) => res.redirect('/404'));
+app.use((_req, res) => res.redirect('/main.html'));
 server.listen(5000, () => console.log('ON'));
 
 const testMap = new tetris_map(10,20);
