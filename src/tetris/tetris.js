@@ -1,0 +1,5 @@
+const Tetris = class {
+    constructor() {
+        
+    }
+}

@@ -1,9 +1,7 @@
 class Canvas {
 
     constructor(id) {
-        this.canvas = new Array(20);
-        for (let i = 0; i < 20; i++)
-            this.canvas[i] = 0;
+        this.canvas = new Array(20).fill(0);
         
         let can = document.getElementById(id);
         this.ctx = can.getContext('2d');
