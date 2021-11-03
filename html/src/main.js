@@ -13,7 +13,7 @@ class Canvas {
     }
 
     set(x, y, bool) {
-        this.canvas.setBlock(x,y);
+        this.canvas.setBlock(x,y, bool);
     }
 
     draw(x, y, color) {
@@ -195,4 +195,4 @@ class TETRIS {
         }
     }
 
-} 
+}

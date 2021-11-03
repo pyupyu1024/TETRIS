@@ -7,7 +7,7 @@ const server = socket(app);
 app.disable('x-powered-by');
 
 app.use(express.static('html', {
-    extensions: ['html', 'htm']
+    extensions: ['html', 'htm', "js"]
 }));
 
 app.use((_req, res) => res.redirect('/404'));
