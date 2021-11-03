@@ -28,14 +28,8 @@ const TetrisMap = class {
         this.blocks[y] = num;
     }
 
-    deleteLine(i){
-        if(i === undefined) {
-            this.blocks.pop();
-        }
-        else {
-            this.blocks.splice(i,1);
-        }
-
+    deleteLine(i = 0){
+        this.blocks.splice(i,1);
         this.blocks.unshift(0);
     }
 
