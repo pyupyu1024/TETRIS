@@ -1,24 +1,19 @@
-<<<<<<< HEAD
 class Canvas {
 
     constructor(id) {
-        this.canvas = new Array(20).fill(0);
-        
-        let can = document.getElementById(id);
-        this.ctx = can.getContext('2d');
+        this.canvas = new TetrisMap(10,20);
+        this.ctx = document.getElementById(id)?.getContext('2d');
 
         can.width = 250;
         can.height = 500;
     }
 
     get(x, y) {
-        let temp = this.canvas[20 - y];
-        return (temp >> (9 - x)) & 1;
+        return this.canvas.getBlock(x,y)
     }
 
     set(x, y, bool) {
-        if (this.get(x, y) == bool) return;
-        this.canvas[20 - y] ^= 1 << (9 - x);
+        this.canvas.setBlock(x,y);
     }
 
     draw(x, y, color) {
@@ -27,6 +22,66 @@ class Canvas {
         this.ctx.fillRect(...args, 25, 25);
     }
 
+}
+const TetrisMap = class {
+    constructor(width, height) {
+        this.width = width;
+        this.height = height;
+
+        this.blocks = Array(height).fill(0); // width bit * height bit
+    }
+
+    getBlock(x, y){
+        return (this.blocks[y] >> x) & 1;
+    }
+
+    getBlocks(i){ 
+        if(i === undefined) {
+            return this.blocks;
+        }
+        else {
+            return this.blocks[i];
+        }
+    }
+
+    setBlock(x, y, bool) {
+        if (this.getBlock(x, y) == bool) return;
+        this.blocks[y] ^= (1 << x)
+    }
+
+    setBlocks(y, num) {
+        this.blocks[y] = num;
+    }
+
+    deleteLine(i){
+        if(i === undefined) {
+            this.blocks.pop();
+        }
+        else {
+            this.blocks.splice(i,1);
+        }
+
+        this.blocks.unshift(0);
+    }
+
+    makeHashData() {
+        let hashcode = 0;
+
+        for(let i = 0; i< this.blocks.length; i++) {
+            hashcode += this.getBlocks(i) + i * 0xff;
+        }
+
+        return hashcode;
+    }
+
+    process() {
+        for(let i = 0; i< this.blocks.length; i++) {
+            if(this.getBlocks(i) == 0) {
+                this.deleteLine(i);
+            }
+            this.blocks.unshift(0);
+        }
+    }
 }
 
 class BLOCK {
@@ -141,5 +196,3 @@ class TETRIS {
     }
 
 } 
-=======
->>>>>>> 3a060283660ca7d65b234719234528390defc855

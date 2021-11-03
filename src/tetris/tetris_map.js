@@ -7,7 +7,7 @@ const TetrisMap = class {
     }
 
     getBlock(x, y){
-        return (this.blocks[y] >> (x) & 1);
+        return (this.blocks[y] >> x) & 1;
     }
 
     getBlocks(i){ 
@@ -19,18 +19,44 @@ const TetrisMap = class {
         }
     }
 
-    setBlock(x, y) {
-        this.blocks[y] |= (1 << x)
+    setBlock(x, y, bool) {
+        if (this.getBlock(x, y) == bool) return;
+        this.blocks[y] ^= (1 << x)
+    }
+
+    setBlocks(y, num) {
+        this.blocks[y] = num;
+    }
+
+    deleteLine(i){
+        if(i === undefined) {
+            this.blocks.pop();
+        }
+        else {
+            this.blocks.splice(i,1);
+        }
+
+        this.blocks.unshift(0);
     }
 
     makeHashData() {
-        let hashcode = 0xffff;
+        let hashcode = 0;
 
-        for(let n of this.blocks){
-            hashcode += n;
-            hashcode ^= n;
+        for(let i = 0; i< this.blocks.length; i++) {
+            hashcode += this.getBlocks(i) + i * 0xff;
         }
 
         return hashcode;
     }
+
+    process() {
+        for(let i = 0; i< this.blocks.length; i++) {
+            if(this.getBlocks(i) == 0) {
+                this.deleteLine(i);
+            }
+            this.blocks.unshift(0);
+        }
+    }
 }
+
+module.exports = TetrisMap;
